@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李国人民共和国</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #34495e;
+            margin-bottom: 2rem;
+        }
+        
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #aaa, transparent);
+            margin: 1.5rem auto;
+            width: 80%;
+        }
+        
+        main {
+            flex: 1;
+            padding: 4rem 1rem;
+        }
+        
+        .grid-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .grid-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            flex: 1;
+            min-width: 220px;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        
+        .grid-item h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: #2c3e50;
+        }
+        
+        .grid-item p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background-color: #fff;
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.07);
+            margin-top: auto;
+        }
+        
+        footer p {
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        footer p:first-child {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        
+        @media (max-width: 1000px) {
+            .grid-container {
+                flex-wrap: wrap;
+            }
+            
+            .grid-item {
+                min-width: 40%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            
+            .subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .info-bar {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .grid-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PRL</h1>
+        <p class="subtitle">李国人民共和国</p>
+        <div class="info-bar">
+            <span id="time">加载中...</span>
+            <span id="weather">天气信息加载中...</span>
+        </div>
+        <div class="divider"></div>
+    </header>
+    
+    <main>
+        <div class="grid-container">
+            <a href="pr_ht.html" style="text-decoration: none;">
+                <div class="grid-item">
+                    <h2>文物展示</h2>
+                    <p>探索李国历史性文物</p>
+                </div>
+            </a>
+            
+            <a href="ot_1.html" style="text-decoration: none;">
+                <div class="grid-item">
+                    <h2>发布页</h2>
+                    <p>李国最新公告与发布</p>
+                </div>
+            </a>
+            
+            <a href="ot_2.html" style="text-decoration: none;">
+                <div class="grid-item">
+                    <h2>信息综合</h2>
+                    <p>全面了解李国资讯</p>
+                </div>
+            </a>
+            
+            <a href="ot_3.html" style="text-decoration: none;">
+                <div class="grid-item">
+                    <h2>其他</h2>
+                    <p>更多相关内容</p>
+                </div>
+            </a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>这不是一个真正的国家</p>
+        <p>联系方式：admin@prl.dpdns.org</p>
+        <p>李国人民共和国2025版权所有</p>
+    </footer>
+
+    <script>
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                weekday: 'long',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            document.getElementById('time').textContent = now.toLocaleDateString('zh-CN', options);
+        }
+        
+        // 初始调用
+        updateTime();
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+        
+        // 模拟天气数据（实际应用中应使用API）
+        document.getElementById('weather').textContent = '晴，25°C';
+    </script>
+</body>
+</html>

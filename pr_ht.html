@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李国文物陈列馆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #34495e;
+            margin-bottom: 2rem;
+        }
+        
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #aaa, transparent);
+            margin: 1.5rem auto;
+            width: 80%;
+        }
+        
+        .content-container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2.5rem 1rem;
+        }
+        
+        .artifact-list {
+            width: 280px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+            margin-right: 2.5rem;
+        }
+        
+        .artifact-list h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .artifact-item {
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+        }
+        
+        .artifact-item:hover {
+            background-color: #f5f5f5;
+            transform: translateX(5px);
+        }
+        
+        .artifact-item.active {
+            background-color: #2c3e50;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .artifact-display {
+            flex: 1;
+            background: #fff;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 7px 20px rgba(0,0,0,0.08);
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+        
+        .artifact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .artifact-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .artifact-image {
+            height: 220px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-style: italic;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            color: #7f8c8d;
+        }
+        
+        .artifact-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+        
+        .artifact-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #34495e;
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background-color: #fff;
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.07);
+            margin-top: auto;
+        }
+        
+        footer p {
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        footer p:first-child {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        
+        @media (max-width: 1000px) {
+            .content-container {
+                flex-direction: column;
+            }
+            
+            .artifact-list {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 2.5rem;
+            }
+            
+            .artifact-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PRL</h1>
+        <p class="subtitle">李国人民共和国 - 文物陈列馆</p>
+        <div class="info-bar">
+            <span id="time">加载中...</span>
+            <span id="weather">天气信息加载中...</span>
+        </div>
+        <div class="divider"></div>
+    </header>
+    
+    <div class="content-container">
+        <div class="artifact-list">
+            <h2>文物列表</h2>
+            <div class="artifact-item active" data-id="1">1号文物：青铜鼎</div>
+            <div class="artifact-item" data-id="2">2号文物：玉璧</div>
+            <div class="artifact-item" data-id="3">3号文物：青花瓷</div>
+            <div class="artifact-item" data-id="4">4号文物：金缕玉衣</div>
+            <div class="artifact-item" data-id="5">5号文物：兵马俑</div>
+            <div class="artifact-item" data-id="6">6号文物：敦煌壁画</div>
+            <div class="artifact-item" data-id="7">7号文物：司母戊鼎</div>
+        </div>
+        
+        <div class="artifact-display">
+            <h2 class="artifact-title">1号文物：青铜鼎</h2>
+            <div class="artifact-images">
+                <div class="image-container">
+                    <div class="artifact-image">
+                        <img src="https://example.com/images/bronze_ding_1.jpg" alt="青铜鼎正面图" onerror="this.parentNode.innerHTML='<div class=\'image-placeholder\'>图片加载失败: 青铜鼎-正面</div>'">
+                    </div>
+                    <p class="image-caption">青铜鼎-正面</p>
+                </div>
+                <div class="image-container">
+                    <div class="artifact-image">
+                        <img src="https://example.com/images/bronze_ding_2.jpg" alt="青铜鼎侧面图" onerror="this.parentNode.innerHTML='<div class=\'image-placeholder\'>图片加载失败: 青铜鼎-侧面</div>'">
+                    </div>
+                    <p class="image-caption">青铜鼎-侧面</p>
+                </div>
+                <div class="image-container">
+                    <div class="artifact-image">
+                        <img src="https://example.com/images/bronze_ding_3.jpg" alt="青铜鼎铭文图" onerror="this.parentNode.innerHTML='<div class=\'image-placeholder\'>图片加载失败: 青铜鼎-铭文</div>'">
+                    </div>
+                    <p class="image-caption">青铜鼎-铭文</p>
+                </div>
+            </div>
+            <div class="artifact-description">
+                青铜鼎是李国古代最重要的礼器之一，铸造于公元前12世纪。此鼎高56厘米，口径48厘米，重达35公斤，鼎身饰有精美的饕餮纹和云雷纹，内壁铸有28字铭文，记载了李国先祖的功绩。该鼎于1974年出土于李国西山遗址，是研究李国早期文明的重要实物资料。
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>这不是一个真正的国家</p>
+        <p>联系方式：admin@prl.dpdns.org</p>
+        <p>李国人民共和国-文物陈列馆2025版权所有</p>
+    </footer>
+
+    <script>
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                weekday: 'long',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            document.getElementById('time').textContent = now.toLocaleDateString('zh-CN', options);
+        }
+        
+        // 初始调用
+        updateTime();
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+        
+        // 模拟天气数据
+        document.getElementById('weather').textContent = '晴，25°C';
+        
+        // 文物数据
+        const artifacts = {
+            1: {
+                title: "1号文物：青铜鼎",
+                images: [
+                    { url: "https://example.com/images/bronze_ding_1.jpg", caption: "青铜鼎-正面" },
+                    { url: "https://example.com/images/bronze_ding_2.jpg", caption: "青铜鼎-侧面" },
+                    { url: "https://example.com/images/bronze_ding_3.jpg", caption: "青铜鼎-铭文" }
+                ],
+                description: "青铜鼎是李国古代最重要的礼器之一，铸造于公元前12世纪。此鼎高56厘米，口径48厘米，重达35公斤，鼎身饰有精美的饕餮纹和云雷纹，内壁铸有28字铭文，记载了李国先祖的功绩。该鼎于1974年出土于李国西山遗址，是研究李国早期文明的重要实物资料。"
+            },
+            2: {
+                title: "2号文物：玉璧",
+                images: [
+                    { url: "https://example.com/images/jade_bi_1.jpg", caption: "玉璧-正面" },
+                    { url: "https://example.com/images/jade_bi_2.jpg", caption: "玉璧-侧面" },
+                    { url: "https://example.com/images/jade_bi_3.jpg", caption: "玉璧-纹饰" }
+                ],
+                description: "此玉璧为李国中期王室礼器，由和田青玉制成，直径22厘米，孔径5厘米，厚1厘米。玉璧表面光滑如镜，内外缘各饰一周弦纹，中间区域雕刻精细的谷纹，象征五谷丰登。玉璧是李国古代祭祀天地的礼器，代表了当时高超的玉石加工技术。"
+            },
+            3: {
+                title: "3号文物：青花瓷",
+                images: [
+                    { url: "https://example.com/images/porcelain_1.jpg", caption: "青花瓷-全貌" },
+                    { url: "https://example.com/images/porcelain_2.jpg", caption: "青花瓷-纹饰" },
+                    { url: "https://example.com/images/porcelain_3.jpg", caption: "青花瓷-底部" }
+                ],
+                description: "此青花瓷瓶产于李国官窑，高38厘米，口径12厘米，底径14厘米。瓶身绘有山水人物图案，笔法流畅自然，青花发色纯正，浓淡有致。瓶底有\"李国官窑\"四字款识，是李国陶瓷艺术的代表作，展现了当时瓷器烧造技术的最高水平。"
+            },
+            4: {
+                title: "4号文物：金缕玉衣",
+                images: [
+                    { url: "https://example.com/images/jade_burial_suit_1.jpg", caption: "金缕玉衣-全景" },
+                    { url: "https://example.com/images/jade_burial_suit_2.jpg", caption: "金缕玉衣-细节" },
+                    { url: "https://example.com/images/jade_burial_suit_3.jpg", caption: "金缕玉衣-头部" }
+                ],
+                description: "金缕玉衣是李国诸侯王的殓服，由2498片和田玉片用金丝编缀而成。玉衣长1.82米，分为头部、上衣、裤筒、手套和鞋五部分。每片玉片大小形状均经过精细加工，四角穿孔，用金丝编缀。这件金缕玉衣制作精良，保存完好，体现了李国时期玉器制作和金工技术的高超水平。"
+            },
+            5: {
+                title: "5号文物：兵马俑",
+                images: [
+                    { url: "https://example.com/images/terracotta_1.jpg", caption: "兵马俑-将军俑" },
+                    { url: "https://example.com/images/terracotta_2.jpg", caption: "兵马俑-士兵俑" },
+                    { url: "https://example.com/images/terracotta_3.jpg", caption: "兵马俑-战马俑" }
+                ],
+                description: "兵马俑是李国第一位皇帝陵墓的陪葬俑，于1982年发现。目前已发掘三个俑坑，共有陶俑、陶马8000余件。这些陶俑形态各异，面容生动，按照真实军阵排列，展现了李国强大的军事力量。陶俑制作工艺复杂，先塑形后烧制，再施彩绘，是李国雕塑艺术的巅峰之作。"
+            },
+            6: {
+                title: "6号文物：敦煌壁画",
+                images: [
+                    { url: "https://example.com/images/dunhuang_1.jpg", caption: "敦煌壁画-全图" },
+                    { url: "https://example.com/images/dunhuang_2.jpg", caption: "敦煌壁画-细节一" },
+                    { url: "https://example.com/images/dunhuang_3.jpg", caption: "敦煌壁画-细节二" }
+                ],
+                description: "这批敦煌壁画来自于李国西北的敦煌石窟，创作于公元6-8世纪。壁画内容以佛教故事为主，兼有李国社会生活和风俗场景。壁画采用矿物颜料绘制，色彩鲜艳持久，线条流畅优美，人物形象生动，具有极高的艺术价值和历史价值，是研究李国佛教艺术和社会生活的重要资料。"
+            },
+            7: {
+                title: "7号文物：司母戊鼎",
+                images: [
+                    { url: "https://example.com/images/simuwu_ding_1.jpg", caption: "司母戊鼎-正面" },
+                    { url: "https://example.com/images/simuwu_ding_2.jpg", caption: "司母戊鼎-侧面" },
+                    { url: "https://example.com/images/simuwu_ding_3.jpg", caption: "司母戊鼎-铭文" }
+                ],
+                description: "司母戊鼎是李国已发现的最重青铜器，高133厘米，口长110厘米，口宽79厘米，重达832.84公斤。鼎身饰有饕餮纹和夔龙纹，腹内壁铸有\"司母戊\"三字铭文。此鼎铸造工艺复杂，需要多个熔炉同时浇铸，体现了李国青铜铸造技术的极高成就，是李国青铜文化的象征。"
+            }
+        };
+        
+        // 文物切换功能
+        const artifactItems = document.querySelectorAll('.artifact-item');
+        const artifactTitle = document.querySelector('.artifact-title');
+        const artifactImagesContainer = document.querySelector('.artifact-images');
+        const artifactDesc = document.querySelector('.artifact-description');
+        
+        artifactItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // 更新激活状态
+                artifactItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 更新显示内容
+                const artifactId = this.getAttribute('data-id');
+                const artifact = artifacts[artifactId];
+                
+                artifactTitle.textContent = artifact.title;
+                artifactDesc.textContent = artifact.description;
+                
+                // 更新图片
+                artifactImagesContainer.innerHTML = '';
+                artifact.images.forEach(img => {
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'image-container';
+                    
+                    const imageDiv = document.createElement('div');
+                    imageDiv.className = 'artifact-image';
+                    
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img.url;
+                    imgElement.alt = img.caption;
+                    imgElement.onerror = function() {
+                        this.parentNode.innerHTML = '<div class="image-placeholder">图片加载失败: ' + img.caption + '</div>';
+                    };
+                    
+                    imageDiv.appendChild(imgElement);
+                    
+                    const caption = document.createElement('p');
+                    caption.className = 'image-caption';
+                    caption.textContent = img.caption;
+                    
+                    imageContainer.appendChild(imageDiv);
+                    imageContainer.appendChild(caption);
+                    
+                    artifactImagesContainer.appendChild(imageContainer);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
